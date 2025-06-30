@@ -14,6 +14,11 @@ export default defineConfig(({ mode }) => {
         alias: {
           '@': path.resolve(__dirname, '.'),
         }
-      }
+      },
+      server: {
+        proxy: {
+          '/api': 'http://localhost:3001', // Proxy API requests to the Express server
+        },
+      },
     };
 });

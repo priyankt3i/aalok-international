@@ -9,3 +9,31 @@
   font-style: normal;
 }
 
+.float-image-container {
+  float: right; /* Floats the image to the right of the text */
+  width: 300px; /* Adjust the width as needed for your image */
+  margin-left: 20px; /* Adds space between the image and the text to its left */
+  margin-bottom: 10px; /* Adds space below the image */
+}
+
+/* Optional: Clearfix to prevent layout issues with subsequent content if needed */
+.image-with-text-container::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* For responsiveness: Adjust image width on smaller screens */
+@media (max-width: 768px) {
+  .float-image-container {
+    float: none; /* Remove float on smaller screens */
+    width: 100%; /* Make image full width */
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center; /* Center the image */
+  }
+  .float-image-container img {
+    max-width: 80%; /* Limit image width to avoid stretching */
+    height: auto;
+  }
+}
