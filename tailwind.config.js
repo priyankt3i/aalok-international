@@ -3,11 +3,13 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./public/**/*.html", // Include HTML files in public directory
+    "./public/**/*.{js,ts,jsx,tsx}", // Include JS/TSX files in public directory
   ],
   theme: {
     extend: {
       fontFamily: {
-        'indian-calligra': ['BitsIndianCalligra', 'cursive'],
+        'dancing-script': ['"Dancing Script"', 'cursive'],
       },
     },
   },

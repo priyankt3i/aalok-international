@@ -6,7 +6,7 @@ const Hero: React.FC = () => {
     <section id="home">
       <div className="w-full bg-gray-100">
         <img 
-          src="/madhubani art.png" 
+          src="/madhubani-art.png" 
           alt="Indian folk art of a peacock" 
           className="w-full h-full object-cover"
         />

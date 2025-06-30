@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'BitsIndianCalligra';
-  src: url('/fonts/bitsindiancalligra-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); } /* Animate by 50% for seamless loop with duplicated content */
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  /* Removed display: inline-block; as flex is now used in Ticker.tsx */
+  /* Removed width: 200%; as flex handles content sizing */
 }

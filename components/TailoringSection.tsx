@@ -21,7 +21,7 @@ const TailoringSection: React.FC = () => {
                   </a>
               </div>
                <div className="rounded-lg overflow-hidden shadow-md">
-                  <img src="https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?q=80&w=800&auto=format&fit=crop" alt="Tailor working on a garment" className="w-full h-full object-cover"/>
+                  <img src="/6daef0_0552f5cd6fc04e82883117d76428989a.png" alt="Tailor working on a garment" className="w-full h-full object-cover"/>
               </div>
           </div>
       </div>

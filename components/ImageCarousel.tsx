@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ImageModal from './ImageModal';
 
 interface ImageCarouselProps {
   images: string[];
@@ -6,6 +7,15 @@ interface ImageCarouselProps {
 
 const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const openModal = (imageSrc: string) => {
+    setSelectedImage(imageSrc);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
 
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
@@ -26,13 +36,18 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
   return (
     <div className="relative w-full">
       {/* Carousel wrapper */}
-      <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+      <div className="relative h-96 overflow-hidden rounded-lg">
         {images.map((image, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === currentIndex ? 'opacity-100 z-10' : 'opacity-0'}`}
+            className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ease-in-out ${index === currentIndex ? 'opacity-100 z-10' : 'opacity-0'}`}
           >
-            <img src={image} className="block w-full h-full object-cover" alt={`Slide ${index + 1}`} />
+            <img
+              src={image}
+              className="block max-h-full max-w-full object-contain cursor-pointer"
+              alt={`Slide ${index + 1}`}
+              onClick={() => openModal(image)}
+            />
           </div>
         ))}
       </div>
@@ -47,6 +62,8 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
           <svg className="w-4 h-4 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4"/></svg>
         </span>
       </button>
+
+      <ImageModal src={selectedImage} alt="Full screen image" onClose={closeModal} />
     </div>
   );
 };

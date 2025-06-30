@@ -1,29 +1,46 @@
 
-import React from 'react';
-import type { GalleryItem } from '../types';
+import React, { useState } from 'react';
+import ImageCarousel from './ImageCarousel';
 
-const galleryItems: GalleryItem[] = [
-  { id: 1, src: 'https://images.unsplash.com/photo-1581338834647-b5fb373024e2?w=500&h=700&fit=crop', alt: 'Elegant woman in red gown', category: 'Women' },
-  { id: 2, src: 'https://images.unsplash.com/photo-1617137968427-85924c800a22?w=500&h=700&fit=crop', alt: 'Man in traditional attire', category: 'Men' },
-  { id: 3, src: 'https://images.unsplash.com/photo-1551803091-e25620473ae8?w=500&h=700&fit=crop', alt: 'Woman in ornate dress', category: 'Women' },
-  { id: 4, src: 'https://images.unsplash.com/photo-1611892880974-883a1f2fbf49?w=500&h=700&fit=crop', alt: 'Child in festive clothing', category: 'Children' },
-  { id: 5, src: 'https://images.unsplash.com/photo-1594382176233-a885e353841e?w=500&h=700&fit=crop', alt: 'Woman in a vibrant saree', category: 'Women' },
-  { id: 6, src: 'https://images.unsplash.com/photo-1599763242946-8a712f3e8f80?w=500&h=700&fit=crop', alt: 'Man in a formal sherwani', category: 'Men' },
-  { id: 7, src: 'https://images.unsplash.com/photo-1617137968429-936b8a8b9c6d?w=500&h=700&fit=crop', alt: 'Detailed embroidery on a dress', category: 'Women' },
-  { id: 8, src: 'https://images.unsplash.com/photo-1603792228532-6c731424b47c?w=500&h=700&fit=crop', alt: 'Couple in wedding attire', category: 'Women' },
+const categories = [
+  { name: 'Anarkali', path: '/inventory/anarkali' },
+  { name: 'Salwaar', path: '/inventory/salwaar' },
+  { name: 'Saree', path: '/inventory/saree' },
+  { name: 'Ghaghra', path: '/inventory/ghagra' },
 ];
 
-const GalleryImage: React.FC<{ item: GalleryItem }> = ({ item }) => (
-    <div className="group relative overflow-hidden rounded-md cursor-pointer">
-        <img src={item.src} alt={item.alt} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-        <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-all duration-500"></div>
-        <div className="absolute bottom-0 left-0 p-3">
-            <span className="bg-white/90 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">{item.category}</span>
-        </div>
-    </div>
-);
-
 const GallerySection: React.FC = () => {
+  const [activeTab, setActiveTab] = useState(categories[0].name);
+
+  const getImagesForCategory = (categoryPath: string) => {
+    switch (categoryPath) {
+      case '/inventory/anarkali':
+        return [
+          '/inventory/anarkali/6daef0_3fc90eea524744b1bea1b3c0b6c64a1b.jpg',
+          '/inventory/anarkali/6daef0_74e69e03a4274722b9ca7daa4b1c5b58.jpg',
+          '/inventory/anarkali/6daef0_11240e3c856c40b1aba3c4e208adaebe.jpg',
+          '/inventory/anarkali/6daef0_d8b0fe3395584803824144d3d2c561c3.jpg',
+        ];
+      case '/inventory/salwaar':
+        return [
+          '/inventory/salwaar/6daef0_a151ffc93d21497f8819d2f13330a20e.jpg',
+        ];
+      case '/inventory/saree':
+        return [
+          '/inventory/saree/6daef0_667eaac6c4ac403593304d6c03ca0509.jpg',
+          '/inventory/saree/6daef0_08928c5806944390a1ff2ce00ff6629f.jpg',
+        ];
+      case '/inventory/ghagra':
+        return [
+          '/inventory/ghagra/6daef0_987baf7cdff8455de9d65359bc316f172.jpg',
+          '/inventory/ghagra/6daef0_3164b5197e9d43f1b1e2884297c868b3.jpg',
+          '/inventory/ghagra/6daef0_f02d25047a4442fa80ca9058077cc635.jpg',
+        ];
+      default:
+        return [];
+    }
+  };
+
   return (
     <section id="portfolio" className="py-16 lg:py-24 px-6 lg:px-8">
       <div className="container mx-auto">
@@ -33,8 +50,35 @@ const GallerySection: React.FC = () => {
             A glimpse into the world of Aalok International. Designs for women, men, and children.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {galleryItems.map(item => <GalleryImage key={item.id} item={item} />)}
+
+        <div className="mb-8">
+          <div className="flex justify-center border-b border-gray-200">
+            {categories.map((category) => (
+              <button
+                key={category.name}
+                className={`py-2 px-4 text-lg font-medium ${
+                  activeTab === category.name
+                    ? 'border-b-2 border-indigo-600 text-indigo-600'
+                    : 'text-gray-600 hover:text-gray-800'
+                }`}
+                onClick={() => setActiveTab(category.name)}
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-12">
+          {categories.map((category) => (
+            <div
+              key={category.name}
+              className={`${activeTab === category.name ? 'block' : 'hidden'}`}
+            >
+              <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">{category.name} Collection</h3>
+              <ImageCarousel images={getImagesForCategory(category.path)} />
+            </div>
+          ))}
         </div>
       </div>
     </section>
