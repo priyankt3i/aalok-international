@@ -2,7 +2,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  openStoryModal: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ openStoryModal }) => {
   const navLinks = [
     { name: 'About', href: '#about' },
     { name: 'Services', href: '#services' },
@@ -20,9 +24,23 @@ const Header: React.FC = () => {
         <div className="flex items-center space-x-8">
             <nav className="hidden md:flex items-center space-x-8">
               {navLinks.map((link) => (
-                <Link key={link.name} to={link.href} className="text-sm font-medium uppercase tracking-widest text-gray-500 hover:text-gray-900 transition-colors">
-                  {link.name}
-                </Link>
+                link.name === 'Contact' ? ( // Special handling for Contact to allow Story before it
+                  <React.Fragment key={link.name}>
+                    <button
+                      onClick={openStoryModal}
+                      className="text-sm font-medium uppercase tracking-widest text-gray-500 hover:text-gray-900 transition-colors"
+                    >
+                      Story
+                    </button>
+                    <Link to={link.href} className="text-sm font-medium uppercase tracking-widest text-gray-500 hover:text-gray-900 transition-colors">
+                      {link.name}
+                    </Link>
+                  </React.Fragment>
+                ) : (
+                  <Link key={link.name} to={link.href} className="text-sm font-medium uppercase tracking-widest text-gray-500 hover:text-gray-900 transition-colors">
+                    {link.name}
+                  </Link>
+                )
               ))}
             </nav>
             <button className="text-gray-500 hover:text-gray-900 transition-colors">
