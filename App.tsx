@@ -10,6 +10,7 @@ import TailoringSection from './components/TailoringSection';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import FashionShowGallery from './pages/FashionShowGallery';
+import Chatbot from './components/Chatbot';
 
 const Home: React.FC = () => (
   <>
@@ -42,6 +43,7 @@ const App: React.FC = () => {
             </Routes>
           </main>
           <Footer />
+          <Chatbot />
         </div>
       </div>
     </Router>

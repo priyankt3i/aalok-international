@@ -25,7 +25,7 @@ const Contact: React.FC = () => {
             <div className="space-y-2 text-gray-700">
               <p><strong>Tuesdays - Saturdays:</strong> 11 AM - 8 PM</p>
               <p><strong>Sundays:</strong> 1 PM - 7 PM</p>
-              <p>Closed Mondays, all state & federal holidays</p>
+              <p>Closed Mondays, All State & Federal Holidays</p>
             </div>
           </div>
         </div>
